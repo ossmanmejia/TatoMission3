@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Misión 3 – TATO | Criptograma PIIOM</title>
+  <style>
+    :root {
+      --bg: #0f1223;
+      --card: #171a31;
+      --muted: #98a2b3;
+      --text: #e6e8ef;
+      --accent: #7c9cff;
+      --accent-2: #6ee7b7;
+      --danger: #ff7a7a;
+      --success: #7dffa7;
+      --pill: #22264a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background: radial-gradient(1200px 1200px at 20% 0%, #121636 0%, var(--bg) 45%);
+      color: var(--text);
+      display: grid;
+      place-items: start center;
+      padding: 24px;
+      gap: 24px;
+    }
+
+    .wrapper {
+      width: min(960px, 100%);
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(124, 156, 255, .08), rgba(124, 156, 255, .02));
+      border: 1px solid #2a2f57;
+      border-radius: 20px;
+      padding: 20px 22px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.cols {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 900px) {
+      .grid.cols {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #22264a;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .25);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pill);
+      color: #c7cffb;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .crypt-box {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      background: #0c0f24;
+      border: 1px dashed #2b3160;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 18px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid #3a3f72;
+      background: #1a1e3b;
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .15s ease transform, .15s ease background, .15s ease border;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: #4b5193;
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.primary {
+      background: linear-gradient(180deg, #2b3271, #2a3167);
+      border-color: #4b59ff;
+    }
+
+    .btn.success {
+      background: linear-gradient(180deg, #1f6a45, #175739);
+      border-color: #3fe29a;
+    }
+
+    .btn.danger {
+      background: linear-gradient(180deg, #712b2b, #622626);
+      border-color: #ff8a8a;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background: #0c0f24;
+      border: 1px solid #2a2f57;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .title {
+      font-weight: 800;
+      font-size: 18px;
+      margin: 0 0 6px;
+    }
+
+    .timer {
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .ok {
+      color: var(--accent-2);
+    }
+
+    .bad {
+      color: var(--danger);
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #232853;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <section class="hero">
+      <div class="row" style="justify-content: space-between; align-items: start; gap: 12px">
+        <div>
+          <h1>Misión 3 — TATO: Descifra el mensaje</h1>
+          <p class="sub">Explorers, TATO —el Guardián de la Comunicación— interceptó un mensaje cifrado que el Virus
+            Enigma infiltró en la red de los pilares PIIOM. ¡Descífralo para estabilizar las señales!</p>
+        </div>
+        <div class="pill">⏱️ Temporizador: <span id="time" class="timer">20:00</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row" style="justify-content: space-between; align-items: center">
+        <p class="title" style="margin:0">📜 Conoce el reto</p>
+        <button class="btn" id="toggleScript">Mostrar/Ocultar</button>
+      </div>
+      <div id="script" style="display:none; margin-top: 10px">
+        <p>“Explorers, TATO —el Guardián de la Comunicación— acaba de interceptar un mensaje cifrado del Virus Enigma.
+          El sistema marca interferencias entre los cinco pilares. Si logramos descifrarlo, podremos restaurar el flujo
+          de señales. Tienen <strong>20 minutos</strong>. ¡Adelante!”</p>
+        <ul>
+          <li><strong>Pista 1:</strong> Es un cifrado por sustitución tipo <em>César (+3)</em>. Para descifrar
+            aplica −3.</li>
+          <li><strong>Pista 2:</strong> El mensaje habla de los pilares: Bio‑Eco, Granja, Energía‑R, BienSalud y
+            CienPaz.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid cols">
+      <div class="card">
+        <p class="title">🧩 Criptograma</p>
+        <div class="crypt-box" id="cipher">HO YLUXV HQLJPD DOWHUD ORV PHQVDMHV HQWUH ORV SLODUHV. VROR ORV HASORUHUV
+          SXHGHQ UHVWDXUDU OD FRPXQLFDFLRQ.</div>
+        <p class="hint">Pista: está cifrado con <strong>Cifrado César (desplazamiento +3)</strong>. Para descifrar,
+          aplica <strong>−3</strong>.</p>
+        <div class="row" style="margin-top: 12px">
+          <input id="answer" placeholder="Escribe aquí el mensaje descifrado…" aria-label="Respuesta descifrada" />
+          <button class="btn primary" id="check">Verificar</button>
+          <button class="btn" id="hint">Mostrar/ocultar ayuda</button>
+          <button class="btn danger" id="reveal" disabled>Revelar (desactivado)</button>
+        </div>
+        <div id="feedback" class="hint" style="margin-top:8px"></div>
+        <details id="help" style="margin-top: 12px; display:none">
+          <summary>¿Cómo funciona el Cifrado César?</summary>
+          <p class="hint">Desplaza cada letra un número fijo de posiciones en el alfabeto. Aquí usamos
+            <strong>+3</strong>: <code>A→D</code>, <code>B→E</code>, <code>C→F</code>… No afecta números, espacios ni
+            signos. Para descifrar, aplica <strong>−3</strong>.
+          </p>
+        </details>
+      </div>
+      <div class="card">
+        <p class="title">🎯 Objetivo</p>
+        <p class="hint">Descifra el mensaje para estabilizar la red de comunicación entre los pilares: Bio‑Eco, Granja,
+          Energía‑R, BienSalud y CienPaz.</p>
+      </div>
+    </section>
+
+
+
+    <p class="footer-note">Hecho con ♥ para la narrativa PIIOM – Explorers vs Virus Enigma. Archivo único (HTML/CSS/JS)
+      listo para subir a cualquier hosting gratuito (GitHub Pages, Netlify, Vercel, etc.).</p>
+  </div>
+
+  <!-- Canvas para confeti -->
+  <canvas id="confetti" style="position:fixed; inset:0; pointer-events:none"></canvas>
+
+  <script>
+    // ======= Utilidades =======
+    const $ = (sel) => document.querySelector(sel);
+    const cipher = $("#cipher");
+    const answer = $("#answer");
+    const feedback = $("#feedback");
+
+
+    // Mensaje objetivo en español (Cifrado César, sin tildes)
+    const target = "EL VIRUS ENIGMA ALTERA LOS MENSAJES ENTRE LOS PILARES. SOLO LOS EXPLORERS PUEDEN RESTAURAR LA COMUNICACION.";
+
+    function normalize(s) {
+      return (s || "")
+        .toUpperCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^A-Z0-9 ]+/g, '')
+        .replace(/\s+/g, ' ') // colapsa espacios
+        .trim();
+    }
+
+    function caesar(str, shift) {
+      return str.replace(/[A-Za-z]/g, c => {
+        const base = c <= 'Z' ? 65 : 97;
+        return String.fromCharCode(((c.charCodeAt(0) - base + shift) % 26 + 26) % 26 + base);
+      });
+    }
+
+
+    // ======= Verificación =======
+    function checkAnswer() {
+      const ok = normalize(answer.value) === normalize(target);
+      if (ok) {
+        feedback.innerHTML = '✅ <span class="ok">¡Correcto! Has restablecido la comunicación.</span>';
+        celebrate();
+        localStorage.setItem('tato_solved', '1');
+      } else {
+        // Sugerencia: si el usuario escribió un César +3, ofrecer ayuda
+        const maybeCesar = normalize(caesar(answer.value, 3));
+        if (maybeCesar === normalize(target)) {
+          feedback.innerHTML = 'ℹ️ <span class="ok">Casi: aplicaste +3. Para descifrar usa −3 o pulsa "Revelar".</span>';
+        } else {
+          feedback.innerHTML = '❌ <span class="bad">No coincide aún. Revisa el desplazamiento (−3) y la ortografía.</span>';
+        }
+      }
+    }
+
+    $("#check").addEventListener('click', checkAnswer);
+
+    // Mostrar ayuda
+    $("#hint").addEventListener('click', () => {
+      const el = $("#help");
+      el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+    });
+
+    // Revelar respuesta
+    const revealBtn = $("#reveal");
+    revealBtn.addEventListener('click', () => {
+      if (revealBtn.hasAttribute('disabled')) return;
+      answer.value = target;
+      checkAnswer();
+    });
+
+    // Mostrar/Ocultar guion
+    $("#toggleScript").addEventListener('click', () => {
+      const s = $("#script");
+      s.style.display = (s.style.display === 'none' || !s.style.display) ? 'block' : 'none';
+    });
+
+    // ======= Temporizador =======
+    const timeEl = $("#time");
+    let seconds = 20 * 60; // 20 minutos
+    function renderTime() {
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      timeEl.textContent = `${m}:${s}`;
+    }
+    renderTime();
+    const t = setInterval(() => {
+      seconds--; renderTime();
+      if (seconds <= 0) {
+        clearInterval(t);
+        feedback.innerHTML = '⏰ Tiempo finalizado. Ahora puedes usar “Revelar”.';
+        const revealBtn = document.querySelector('#reveal');
+        if (revealBtn) {
+          revealBtn.removeAttribute('disabled');
+          revealBtn.textContent = 'Revelar';
+        }
+      }
+    }, 1000);
+
+    // ======= Confeti mínimo sin librerías =======
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W, H; function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+    addEventListener('resize', resize); resize();
+
+    let confetti = [];
+    function celebrate() {
+      for (let i = 0; i < 180; i++) {
+        confetti.push({
+          x: Math.random() * W, y: -20, r: 3 + Math.random() * 4,
+          vx: (-1 + Math.random() * 2) * 2, vy: 2 + Math.random() * 3,
+          life: 120 + Math.random() * 60
+        });
+      }
+    }
+
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      confetti.forEach((p) => {
+        p.x += p.vx; p.y += p.vy; p.vy *= 0.99; p.life--;
+        ctx.globalAlpha = Math.max(0, p.life / 180);
+        ctx.fillStyle = ['#7c9cff', '#6ee7b7', '#f9f871', '#ff9ebb'][p.life % 4];
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      });
+      confetti = confetti.filter(p => p.life > 0 && p.y < H + 10);
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    // ======= Autocompleta si el/la profe quiere probar rápido con teclado Enter =======
+    answer.addEventListener('keydown', (e) => { if (e.key === 'Enter') { checkAnswer(); } });
+
+    // (Opcional) auto-sugerencia: convertir automáticamente Cifrado César a texto si escribe "cesar:" como prefijo
+    answer.addEventListener('input', () => {
+      const v = answer.value;
+      if (v.toLowerCase().startsWith('cesar:')) {
+        // Aplica desplazamiento -3 para descifrar
+        answer.value = caesar(v.slice(6), -3);
+      }
+    });
+  </script>
+</body>
+
+</html>
